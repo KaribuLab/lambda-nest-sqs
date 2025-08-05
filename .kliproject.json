@@ -71,6 +71,11 @@
       "name": "parameter_path",
       "description": "Parameter path",
       "type": "string"
+    },
+    {
+      "name": "queue_arn_path",
+      "description": "Queue arn path",
+      "type": "string"
     }
   ],
   "posthooks": [
