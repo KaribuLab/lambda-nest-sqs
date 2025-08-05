@@ -1,0 +1,82 @@
+{
+  "templates": [
+    {
+      "rootDir": "template",
+      "delete": true,
+      "files": [
+        {
+          "source": "template/template.service.ts",
+          "destination": "src/{{.Inputs.module}}/{{.Inputs.module}}.service.ts"
+        },
+        {
+          "source": "template/template.module.ts",
+          "destination": "src/{{.Inputs.module}}/{{.Inputs.module}}.module.ts"
+        },
+        {
+          "source": "template/template.dto.ts",
+          "destination": "src/{{.Inputs.module}}/{{.Inputs.module}}.dto.ts"
+        },
+        {
+          "source": "template/app.module.ts",
+          "destination": "src/app.module.ts"
+        },
+        {
+          "source": "template/entrypoint.ts",
+          "destination": "src/entrypoint.ts"
+        }
+      ]
+    },
+    {
+      "rootDir": "aws",
+      "delete": false,
+      "files": [
+        {
+          "source": "aws/lambda/terragrunt.hcl",
+          "destination": "aws/lambda/terragrunt.hcl"
+        }
+      ]
+    },
+    {
+      "rootDir": "./",
+      "delete": false,
+      "files": [
+        {
+          "source": "package.json",
+          "destination": "package.json"
+        },
+        {
+          "source": "serverless.hcl",
+          "destination": "serverless.hcl"
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "name": "module",
+      "description": "Project module",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "description": "Project description",
+      "type": "string"
+    },
+    {
+      "name": "service_name",
+      "description": "Service name",
+      "type": "string"
+    },
+    {
+      "name": "parameter_path",
+      "description": "Parameter path",
+      "type": "string"
+    }
+  ],
+  "posthooks": [
+    {
+      "name": "Install npm dependencies",
+      "command": "npm install"
+    }
+  ]
+}
