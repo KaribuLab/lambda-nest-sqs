@@ -24,7 +24,7 @@ dependency parameters {
   config_path = "${get_parent_terragrunt_dir()}/aws/parameter"
   mock_outputs = {
     parameters = {
-      "{{.Inputs.parameter_path|toLowerCase}}/prod/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn" = "arn:aws:sqs:us-east-1:000000000000:test-queue"
+      "{{.Inputs.parameter_path|toLowerCase}}/prod/infra/{{.Inputs.queue_arn_path|toLowerCase}}" = "arn:aws:sqs:us-east-1:000000000000:test-queue"
     }
   }
 }
@@ -60,7 +60,7 @@ inputs = {
     LOG_LEVEL           = local.serverless.locals.stage !== "prod" ? "debug" : "info"
   }
   event_sources_arn = [
-    dependency.parameters.outputs.parameters["${local.base_path}/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn"]
+    dependency.parameters.outputs.parameters["${local.base_path}/infra/{{.Inputs.queue_arn_path|toLowerCase}}"]
   ]
   runtime       = "nodejs22.x"
   handler       = "src/entrypoint.handler"
