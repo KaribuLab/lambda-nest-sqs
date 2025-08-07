@@ -57,6 +57,7 @@ inputs = {
   })
   environment_variables = {
     AWS_STAGE           = local.serverless.locals.stage
+    LOG_LEVEL           = local.serverless.locals.stage !== "prod" ? "debug" : "info"
   }
   event_sources_arn = [
     dependency.parameters.outputs.parameters["${local.base_path}/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn"]
