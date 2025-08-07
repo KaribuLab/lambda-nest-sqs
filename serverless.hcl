@@ -12,7 +12,7 @@ locals {
       name = "Production"
     }
   }
-  service_name   = "{{.Inputs.module|toLowerCase}}"
+  service_name   = "{{.Inputs.service_name|toLowerCase}}"
   service_bucket = "${local.service_name}-${local.region}"
   log_retention  = 7
   parameter_path = "{{.Inputs.parameter_path|toLowerCase}}"
