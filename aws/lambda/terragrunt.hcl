@@ -56,7 +56,6 @@ inputs = {
     ]
   })
   environment_variables = {
-    AWS_REGION          = local.serverless.locals.region
     AWS_STAGE           = local.serverless.locals.stage
   }
   event_sources_arn = [
