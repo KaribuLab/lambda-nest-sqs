@@ -51,7 +51,7 @@ inputs = {
           "sqs:GetQueueAttributes",
           "sqs:ReceiveMessage",
         ],
-        "Resource" : dependency.parameters.outputs.parameters["${local.base_path}/infra/{{.Inputs.queue_arn_path|toLowerCase}}"]
+        "Resource" : dependency.parameters.outputs.parameters["${local.base_path}/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn"]
       },
     ]
   })
@@ -59,7 +59,7 @@ inputs = {
     AWS_STAGE           = local.serverless.locals.stage
   }
   event_sources_arn = [
-    dependency.parameters.outputs.parameters["${local.base_path}/infra/{{.Inputs.queue_arn_path|toLowerCase}}"]
+    dependency.parameters.outputs.parameters["${local.base_path}/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn"]
   ]
   runtime       = "nodejs22.x"
   handler       = "src/entrypoint.handler"
