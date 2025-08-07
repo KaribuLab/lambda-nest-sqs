@@ -24,7 +24,7 @@ dependency parameters {
   config_path = "${get_parent_terragrunt_dir()}/aws/parameter"
   mock_outputs = {
     parameters = {
-      "${local.base_path}/prod/infra/{{.Inputs.queue_arn_path|toLowerCase}}" = "arn:aws:sqs:us-east-1:000000000000:test-queue"
+      "{{.Inputs.parameter_path|toLowerCase}}/prod/infra/sqs/{{.Inputs.module|toLowerCase}}/queue_arn" = "arn:aws:sqs:us-east-1:000000000000:test-queue"
     }
   }
 }
