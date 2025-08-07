@@ -8,6 +8,7 @@ import {
 import { AppModule } from '@lambda/app.module'
 import { INestApplicationContext, Logger as NestLogger } from '@nestjs/common'
 import { Logger } from 'nestjs-pino'
+import { {{.Inputs.module|toPascalCase}}Service } from '@lambda/{{.Inputs.module|toLowerCase}}/{{.Inputs.module|toLowerCase}}.service'
 
 const logger = new NestLogger('{{.Inputs.module|toLowerCase}}LambdaHandler')
 
@@ -28,6 +29,8 @@ if (app === undefined) {
   app = await initApp();
 }
 
+const service = app.get({{.Inputs.module|toPascalCase}}Service)
+
 export const handler: Handler<SQSEvent> = async (
   event: SQSEvent,
   _context: Context
@@ -41,8 +44,8 @@ export const handler: Handler<SQSEvent> = async (
       )
 
       const promises = records.map(async (record) => {
-        console.log(`Procesando mensaje: ${JSON.stringify(record)}`)
-        return Promise.resolve()
+        logger.debug(`Procesando mensaje: ${JSON.stringify(record)}`)
+        return service.process(record)
       })
 
       await Promise.all(promises)
